@@ -69,20 +69,20 @@ public class Virus {
         this.creator = creator;
     }
 
-    public boolean isDeadly() {
+    public boolean getIsDeadly() {
         return isDeadly;
     }
 
-    public void setDeadly(boolean deadly) {
-        isDeadly = deadly;
+    public void setIsDeadly(boolean isDeadly) {
+        this.isDeadly = isDeadly;
     }
 
-    public boolean isCurable() {
+    public boolean getIsCurable() {
         return isCurable;
     }
 
-    public void setCurable(boolean curable) {
-        isCurable = curable;
+    public void setIsCurable(boolean isCurable) {
+        this.isCurable = isCurable;
     }
 
     public Mutation getMutation() {
