@@ -17,17 +17,24 @@ public class Virus {
     private String creator;
     private boolean isDeadly;
     private boolean isCurable;
+
+    @Enumerated(EnumType.STRING)
     private Mutation mutation;
+
     private int turnoverRate;
     private int hoursUntilTurn;
+
+    @Enumerated(EnumType.STRING)
     private Magnitude magnitude;
+
     private Date releasedOn;
 
     @ManyToMany
     @JoinTable(name="capitals_virus",
-            joinColumns={@JoinColumn(name="capital_id")}
-    ,inverseJoinColumns ={@JoinColumn(name="virus_id")} )
+            joinColumns={@JoinColumn(name="virus_id")}
+    ,inverseJoinColumns ={@JoinColumn(name="capital_id")} )
     private List<Capitals> capitals = new ArrayList<>();
+
 
     public Long getId() {
         return id;
