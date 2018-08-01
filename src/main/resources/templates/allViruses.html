@@ -16,31 +16,21 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Description</th>
-            <th>Side Effects</th>
-            <th>Creator</th>
-            <th>IsDeadly</th>
-            <th>IsCurable</th>
-            <th>Mutation</th>
-            <th>Turnover Rate</th>
-            <th>Hours Until Turn</th>
             <th>Magnitude</th>
             <th>Released On</th>
+            <th></th>
+            <th></th>
         </tr>
         <tbody>
         <tr th:each="virus:${allVirusList}">
             <td th:text="${virus.id}"></td>
             <td th:text="${virus.name}"></td>
-            <td th:text="${virus.description}"></td>
-            <td th:text="${virus.sideEffects}"></td>
-            <td th:text="${virus.creator}"></td>
-            <td th:text="${virus.isDeadly}"></td>
-            <td th:text="${virus.isCurable}"></td>
-            <td th:text="${virus.mutation}"></td>
-            <td th:text="${virus.turnoverRate}"></td>
-            <td th:text="${virus.hoursUntilTurn}"></td>
             <td th:text="${virus.magnitude}"></td>
-            <td th:text="${virus.releasedOn}"></td>
+            <td th:text="${#dates.format(virus.releasedOn,'dd-MMM-yyyy')}"></td>
+            <td><button class="btn btn-default"><a th:href="'/editVirus/' + ${virus.id}">Edit</a></button>
+            </td>
+            <td><button class="btn btn-default"><a th:href="'/deleteVirus/' + ${virus.id}">Delete</a></button>
+            </td>
         </tr>
         <tbody>
     </table>

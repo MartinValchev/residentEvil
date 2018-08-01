@@ -10,6 +10,7 @@ import com.task.residentEvil.residentEvil.service.CapitalsService;
 import com.task.residentEvil.residentEvil.service.VirusService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -57,6 +58,12 @@ public class VirusController {
         model.addAttribute("virus",virus);
         return "VirusById";
     }
+    @GetMapping("/viruses")
+    public String getAllViruses(Model model){
+        List<Virus> allVirusList = virusService.getAllVirusList();
+        model.addAttribute("allVirusList",allVirusList);
+        return "allViruses";
+    }
 
     @PostMapping("/add")
     public String addVirus(@Valid @ModelAttribute VirusBindingModel virusBindingModel, BindingResult bindingResult, Model model){
@@ -74,6 +81,25 @@ public class VirusController {
             Virus virus =modelMapper.map(virusBindingModel,Virus.class);
             Virus savedVirus = virusRepository.save(virus);
             return "redirect:virus/" +  savedVirus.getId();
+        }
+    }
+    @GetMapping("/editVirus/{id}")
+    public String getEditVirus(@PathVariable("id")Long id,VirusBindingModel virusBindingModel, Model model){
+        Virus virus = virusService.getVirusById(id);
+
+        if(virus !=null){
+            ModelMapper modelMapper= new ModelMapper();
+            List<Mutation> mutationList = Stream.of(Mutation.values()).collect(Collectors.toList());
+            List<Magnitude> magnitudeList = Stream.of(Magnitude.values()).collect(Collectors.toList());
+            List<Capitals> capitalsList = capitalsService.getCapitalsList();
+            model.addAttribute("allMutations",mutationList);
+            model.addAttribute("magnitudeList",magnitudeList);
+            model.addAttribute("capitalsList",capitalsList);
+            virusBindingModel = modelMapper.map(virus, VirusBindingModel.class);
+            model.addAttribute("virusBindingModel", virusBindingModel);
+            return "EditVirus";
+        }else{
+            return "";
         }
     }
 }
