@@ -10,18 +10,12 @@ import com.task.residentEvil.residentEvil.service.CapitalsService;
 import com.task.residentEvil.residentEvil.service.VirusService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -101,5 +95,30 @@ public class VirusController {
         }else{
             return "";
         }
+    }
+
+    @PutMapping("/editVirus")
+    public String editVirus(@Valid @ModelAttribute VirusBindingModel virusBindingModel, BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()){
+            List<Mutation> mutationList = Stream.of(Mutation.values()).collect(Collectors.toList());
+            List<Magnitude> magnitudeList = Stream.of(Magnitude.values()).collect(Collectors.toList());
+            List<Capitals> capitalsList = capitalsService.getCapitalsList();
+            model.addAttribute("allMutations",mutationList);
+            model.addAttribute("magnitudeList",magnitudeList);
+            model.addAttribute("capitalsList",capitalsList);
+            model.addAttribute("virusBindingModel",virusBindingModel);
+            return "EditVirus";
+        }else{
+            ModelMapper modelMapper = new ModelMapper();
+            Virus virus =modelMapper.map(virusBindingModel,Virus.class);
+            Virus savedVirus = virusRepository.save(virus);
+            return "redirect:virus/" +  savedVirus.getId();
+        }
+    }
+    @GetMapping("/deleteVirus/{id}")
+    public String deleteVirus(@PathVariable("id")Long id){
+       Virus deletedVirus = virusService.getVirusById(id);
+       virusRepository.delete(deletedVirus);
+       return "redirect:/viruses";
     }
 }

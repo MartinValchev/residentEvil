@@ -47,7 +47,7 @@
                         <label for="magnitude" class="col-sm-2 col-form-label"><b>Magnitude: </b> </label><span id ="magnitude" th:text="${virus.magnitude}"></span>
                     </li>
                     <li class="list-group-item">
-                        <label for="releasedOn" class="col-sm-2 col-form-label"><b>Released Date: </b> </label><span id ="releasedOn" th:text="${virus.releasedOn}"></span>
+                        <label for="releasedOn" class="col-sm-2 col-form-label"><b>Released Date: </b> </label><span id ="releasedOn" th:text="${#dates.format(virus.releasedOn,'dd-MMM-yyyy')}"></span>
                     </li>
                 </ul>
                 <div>

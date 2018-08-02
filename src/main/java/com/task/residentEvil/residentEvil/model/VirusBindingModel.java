@@ -12,6 +12,8 @@ import java.util.List;
 
 public class VirusBindingModel {
 
+    private Long id;
+
     @NotBlank(message="Invalid name")
     @Size(min=3, max=10,message = "Name must be between 3 and 10 characters")
     private String name;
@@ -147,5 +149,13 @@ public class VirusBindingModel {
 
     public void setCapitals(List<Capitals> capitals) {
         this.capitals = capitals;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
