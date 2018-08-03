@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,13 +25,20 @@ import java.util.stream.Stream;
 public class VirusController {
 
     @Autowired
-    CapitalsService capitalsService;
+    private CapitalsService capitalsService;
 
     @Autowired
-    VirusRepository virusRepository;
+    private VirusRepository virusRepository;
 
     @Autowired
-    VirusService virusService;
+    private VirusService virusService;
+
+    private ModelMapper modelMapper;
+
+    @Autowired
+    public VirusController(ModelMapper modelMapper){
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping("/")
     public String getHomePage(){
@@ -71,9 +79,7 @@ public class VirusController {
             model.addAttribute("virusBindingModel",virusBindingModel);
             return "AddVirus";
         }else{
-            ModelMapper modelMapper = new ModelMapper();
-            Virus virus =modelMapper.map(virusBindingModel,Virus.class);
-            Virus savedVirus = virusRepository.save(virus);
+            Virus savedVirus = virusService.addVirus(virusBindingModel);
             return "redirect:virus/" +  savedVirus.getId();
         }
     }
@@ -82,7 +88,6 @@ public class VirusController {
         Virus virus = virusService.getVirusById(id);
 
         if(virus !=null){
-            ModelMapper modelMapper= new ModelMapper();
             List<Mutation> mutationList = Stream.of(Mutation.values()).collect(Collectors.toList());
             List<Magnitude> magnitudeList = Stream.of(Magnitude.values()).collect(Collectors.toList());
             List<Capitals> capitalsList = capitalsService.getCapitalsList();
@@ -109,7 +114,6 @@ public class VirusController {
             model.addAttribute("virusBindingModel",virusBindingModel);
             return "EditVirus";
         }else{
-            ModelMapper modelMapper = new ModelMapper();
             Virus virus =modelMapper.map(virusBindingModel,Virus.class);
             Virus savedVirus = virusRepository.save(virus);
             return "redirect:virus/" +  savedVirus.getId();
@@ -121,4 +125,5 @@ public class VirusController {
        virusRepository.delete(deletedVirus);
        return "redirect:/viruses";
     }
+
 }
