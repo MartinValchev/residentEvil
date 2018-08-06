@@ -183,6 +183,21 @@
         </div>
         <input type="submit" class="btn btn-default" value="Submit">
     </form>
-
+    <!--Register form-->
+    <form th:fragment="registerForm" th:object="${registerBindingModel}" method ="post">
+        <div class="form-group">
+            <label for="usernameInput">Username</label>
+            <input type="text" class="form-control" id="usernameInput" placeholder="username" th:field="*{username}">
+        </div>
+        <div class="form-group">
+            <label for="passwordInput">Password</label>
+            <input type="password" class="form-control" id="passwordInput" placeholder="password" th:field="*{password}">
+        </div>
+        <div class="form-group">
+            <label for="retypePasswordInput">Password</label>
+            <input type="password" class="form-control" id="retypePasswordInput" placeholder="retype password" th:field="*{confirmedPassword}">
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit"/>
+    </form>
 </body>
 </html>

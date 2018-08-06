@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+    <meta charset="UTF-8"/>
+    <title>Register Page</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+          th:href="@{bootstrap/css/bootstrap.min.css}"/>
+    </head>
+    <body>
+         <h1>Register Page</h1>
+        <form th:replace="/fragments/forms::registerForm">
+        </form>
+
+         <script th:src="@{/jquery/jquery.min.js}"></script>
+         <script th:src="@{/bootstrap/js/tether.min.js}"></script>
+         <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    </body>
 </html>
+
