@@ -9,7 +9,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class LoginController {
 
     @GetMapping("/register")
-    public  String getRegisterPage(@ModelAttribute  RegisterBindingModel registerBindingModel){
+    public  String getRegisterPage(@ModelAttribute RegisterBindingModel registerBindingModel){
         return "register";
+    }
+
+    @GetMapping("/login")
+    public String getLoginPage(){
+        return "login";
     }
 }

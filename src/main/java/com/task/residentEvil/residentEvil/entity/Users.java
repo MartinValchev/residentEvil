@@ -1,12 +1,16 @@
 package com.task.residentEvil.residentEvil.entity;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name="users")
-public class Users {
+public class Users implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,8 +40,33 @@ public class Users {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     public String getPassword() {
@@ -48,33 +77,18 @@ public class Users {
         this.password = password;
     }
 
-    public boolean getIsAccountNotExpired() {
-        return isAccountNotExpired;
-    }
-
     public void setAccountNotExpired(boolean accountNotExpired) {
         isAccountNotExpired = accountNotExpired;
-    }
-
-    public boolean getIsAccountNotLocked() {
-        return isAccountNotLocked;
     }
 
     public void setAccountNotLocked(boolean accountNotLocked) {
         isAccountNotLocked = accountNotLocked;
     }
 
-    public boolean getIsCredentialsNotExpired() {
-        return isCredentialsNotExpired;
-    }
-
     public void setCredentialsNotExpired(boolean credentialsNotExpired) {
         isCredentialsNotExpired = credentialsNotExpired;
     }
 
-    public boolean getIsEnabled() {
-        return isEnabled;
-    }
 
     public void setEnabled(boolean enabled) {
         isEnabled = enabled;

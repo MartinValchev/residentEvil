@@ -1,7 +1,9 @@
 package com.task.residentEvil.residentEvil.model;
 
+import com.task.residentEvil.residentEvil.annotations.IsPasswordsMatching;
 import javax.validation.constraints.Size;
 
+@IsPasswordsMatching
 public class RegisterBindingModel {
 
     @Size(min=5,message = "Username cannot be less than 5 characters")
@@ -9,6 +11,7 @@ public class RegisterBindingModel {
 
     @Size(min=5, message="Password cannot be less than 5 characters")
     private String password;
+
 
     private String confirmedPassword;
 

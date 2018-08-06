@@ -16,4 +16,5 @@ public class ResidentEvilApplication {
 	public ModelMapper getModelMapper() {
 		return new ModelMapper();
 	}
+
 }
