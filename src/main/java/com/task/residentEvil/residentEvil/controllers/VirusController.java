@@ -80,7 +80,7 @@ public class VirusController {
             return "AddVirus";
         }else{
             Virus savedVirus = virusService.addVirus(virusBindingModel);
-            return "redirect:virus/" +  savedVirus.getId();
+            return "redirect:" +  savedVirus.getId();
         }
     }
     @GetMapping("/editVirus/{id}")
