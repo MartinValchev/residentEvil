@@ -44,7 +44,7 @@ public class VirusController {
     public String getHomePage(){
         return "home";
     }
-    @GetMapping("/add")
+    @GetMapping("/virus/add")
     public String getAddVirus(VirusBindingModel virusBindingModel, Model model){
         List<Mutation> mutationList = Stream.of(Mutation.values()).collect(Collectors.toList());
         List<Magnitude> magnitudeList = Stream.of(Magnitude.values()).collect(Collectors.toList());
@@ -67,7 +67,7 @@ public class VirusController {
         return "allViruses";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/virus/add")
     public String addVirus(@Valid @ModelAttribute VirusBindingModel virusBindingModel, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
             List<Mutation> mutationList = Stream.of(Mutation.values()).collect(Collectors.toList());
@@ -124,6 +124,14 @@ public class VirusController {
        Virus deletedVirus = virusService.getVirusById(id);
        virusRepository.delete(deletedVirus);
        return "redirect:/viruses";
+    }
+
+    @GetMapping("/cures")
+    public String getCuresPage(Model model){
+
+        List<Virus> allVirusList = virusService.getAllVirusList();
+        model.addAttribute("allVirusList",allVirusList);
+        return "cures";
     }
 
 }

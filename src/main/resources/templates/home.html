@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <meta charset="UTF-8">
 <title>Resident Evil home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,9 +36,11 @@
                         <a tabindex="-1" href="/viruses">Show</a>
                     </li>
                     <li class="dropdown-submenu">
-                        <a tabindex="-1" href="/add">Add</a>
+                        <a tabindex="-1" href="/virus/add">Add</a>
                     </li>
-
+                    <li class="dropdown-submenu" sec:authorize="hasRole('ADMIN') OR hasRole('MEDIC')">
+                        <a tabindex="-1" href="/cures">Cures</a>
+                    </li>
                 </ul>
             </li>
             <li class="dropdown-submenu">

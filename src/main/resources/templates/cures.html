@@ -10,7 +10,7 @@
 <body>
 <div class="container">
     <div class="jumbotron">
-        <h2>All Virus List</h2>
+        <h2>Virus List</h2>
     </div>
     <table class="table table-striped" border="1px">
         <tr>
@@ -27,7 +27,7 @@
             <td th:text="${virus.name}"></td>
             <td th:text="${virus.magnitude}"></td>
             <td th:text="${#dates.format(virus.releasedOn,'dd-MMM-yyyy')}"></td>
-            <td><button class="btn btn-default"><a th:href="'/editVirus/' + ${virus.id}">Edit</a></button>
+            <td><button class="btn btn-default"><a th:href="'/deleteVirus/' + ${virus.id}">Delete</a></button>
             </td>
         </tr>
         <tbody>
