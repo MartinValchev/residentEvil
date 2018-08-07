@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+      th:href="@{bootstrap/css/bootstrap.min.css}"/>
+</head>
 <body>
 <nav class="navbar navbar-toggleable-md navbar-inverse" style="background-color: #900c45;" th:fragment="menu">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,11 +23,22 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/viruses">Show</a>
                     <a class="dropdown-item" href="/viruses/add">Add</a>
+                    <a class="dropdown-submenu" sec:authorize="hasRole('ADMIN') OR hasRole('MEDIC')" tabindex="-1" href="/cures">Cures</a>
                 </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/map">Map</a>
             </li>
+            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                <a class="nav-link" href="/users">Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login?logout">Logout</a>
+            </li>
+
         </ul>
     </div>
 </nav>

@@ -33,6 +33,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/virus/**").access("hasRole('CHEMIST') OR hasRole('ADMIN')")
                 .antMatchers("/cures/**").access("hasRole('ADMIN') OR hasRole('MEDIC')")
                 .antMatchers("/map").hasRole("ADMIN")
+                .antMatchers("/users").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
                 .usernameParameter("username")

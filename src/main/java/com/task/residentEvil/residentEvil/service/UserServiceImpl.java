@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -35,6 +36,11 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(true);
         user.setCredentialsNonExpired(true);
         usersRepository.save(user);
+    }
+
+    @Override
+    public List<Users> getAllUsersList() {
+        return this.usersRepository.getAllUsersList();
     }
 
     @Transactional

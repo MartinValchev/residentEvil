@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="application/json; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+    <title>All Virus List</title>
+</head>
+<body>
+<header th:replace="/fragments/menu::menu">
+</header>
+<div class="container">
+    <div class="jumbotron">
+        <h2>All Users List</h2>
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>IsEnabled</th>
+        </tr>
+        <tbody>
+        <tr th:each="user:${usersList}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.isEnabled}"></td>
+        </tr>
+        <tbody>
+    </table>
+</div>
+<script th:src="@{/jquery/jquery.min.js}"></script>
+<script th:src="@{/bootstrap/js/tether.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

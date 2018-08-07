@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Unauthorized Page</title>
+    <meta charset="UTF-8"/>
+    <title>Unauthorized page</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+          th:href="@{bootstrap/css/bootstrap.min.css}"/>
 </head>
 <body>
-<h1>No Access for You</h1>
+<header th:replace="fragments/menu::menu">
+</header>
+
+<main>
+
+</main>
+<h1>No Access</h1>
+<script th:src="@{/jquery/jquery.min.js}"></script>
+<script th:src="@{/bootstrap/js/tether.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>
+

@@ -93,4 +93,8 @@ public class Users implements UserDetails {
         this.authorities = authorities;
     }
 
+    public boolean getIsEnabled(){
+        return this.isEnabled;
+    }
+
 }
