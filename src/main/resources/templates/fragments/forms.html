@@ -200,6 +200,7 @@
             <input type="password" class="form-control" id="retypePasswordInput" placeholder="retype password" th:field="*{confirmedPassword}">
             <div class="form-control-feedback small" th:each="error : ${#fields.errors('global')}" th:text="${error}">Error in useraname</div>
         </div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <input type="submit" class="btn btn-primary" value="Submit"/>
     </form>
 </body>

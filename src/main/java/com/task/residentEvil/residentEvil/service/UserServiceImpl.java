@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -28,18 +30,19 @@ public class UserServiceImpl implements UserService {
         Users user = this.modelMapper.map(registerBindingModel, Users.class);
         String encryptedPassword = this.bCryptPasswordEncoder.encode(registerBindingModel.getPassword());
         user.setPassword(encryptedPassword);
-        user.setAccountNotExpired(true);
-        user.setAccountNotLocked(true);
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
         user.setEnabled(true);
-        user.setCredentialsNotExpired(true);
+        user.setCredentialsNonExpired(true);
         usersRepository.save(user);
     }
 
+    @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users user =this.usersRepository.findOneByUsername(username);
-        if(user == null){
-            throw new UsernameNotFoundException("User not found");
+        Users user = this.usersRepository.findOneByUsername(username);
+        if(user ==null){
+            throw new UsernameNotFoundException("Invalid credentials");
         }
         return user;
     }
