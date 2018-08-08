@@ -2,6 +2,7 @@ package com.task.residentEvil.residentEvil.service;
 
 import com.task.residentEvil.residentEvil.entity.Users;
 import com.task.residentEvil.residentEvil.model.RegisterBindingModel;
+import com.task.residentEvil.residentEvil.model.UsersBindingModel;
 import com.task.residentEvil.residentEvil.repository.UsersRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Users> getAllUsersList() {
         return this.usersRepository.getAllUsersList();
+    }
+
+    @Override
+    public Users getUserById(Long id) {
+        return this.usersRepository.findOneById(id);
+    }
+
+    @Override
+    public void updateUser(UsersBindingModel usersBindingModel) {
+        Users users = modelMapper.map(usersBindingModel, Users.class);
+        usersRepository.save(users);
     }
 
     @Transactional

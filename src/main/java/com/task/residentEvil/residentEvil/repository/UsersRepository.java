@@ -14,4 +14,6 @@ public interface UsersRepository extends CrudRepository<Users,Long>{
 
     @Query("SELECT e from Users e")
     List<Users> getAllUsersList();
+
+    Users findOneById(Long id);
 }

@@ -24,6 +24,8 @@
             <td th:text="${user.id}"></td>
             <td th:text="${user.username}"></td>
             <td th:text="${user.isEnabled}"></td>
+            <td><button class="btn btn-default"><a th:href="'/editUser/' + ${user.id}">Edit</a></button>
+            </td>
         </tr>
         <tbody>
     </table>

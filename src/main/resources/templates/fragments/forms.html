@@ -205,5 +205,69 @@
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <input type="submit" class="btn btn-primary" value="Submit"/>
     </form>
+<!-- Edit Users form-->
+    <form th:object="${usersBindingModel}" th:fragment="editUserForm" th:method="put" th:action="@{/editUser}">
+        <input class="form-control" type="hidden" th:field="*{id}" readonly/>
+        <input class="form-control" type="hidden" th:field="*{password}" readonly/>
+        <div class="form-group row" th:classappend="${#fields.hasErrors('username')} ? 'has-danger'">
+            <div class="col-sm-10">
+                <label for="userName" class="col-sm-2 col-form-label">Username</label>
+                <input type="text" class="form-control form-control-danger" id="userName"
+                       placeholder="user name" th:field="*{username}"/>
+                <div class="form-control-feedback small" th:each="error : ${#fields.errors('username')}" th:text="${error}">Sorry, that name is invalid</div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <ul class="list-group-flush">
+                    <li class="list-group-item">
+                        <input id="isAccountNonExpired" type="checkbox" name="active" th:field="*{isAccountNonExpired}"/>
+                        <label th:for="isAccountNonExpired">&nbsp;isAccountNonExpired</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <ul class="list-group-flush">
+                    <li class="list-group-item">
+                        <input id="isAccountNonLocked" type="checkbox" name="active" th:field="*{isAccountNonLocked}"/>
+                        <label th:for="isAccountNonLocked">&nbsp;isAccountNonLocked</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <ul class="list-group-flush">
+                    <li class="list-group-item">
+                        <input id="isCredentialsNonExpired" type="checkbox" name="active" th:field="*{isCredentialsNonExpired}"/>
+                        <label th:for="isCredentialsNonExpired">&nbsp;isCredentialsNonExpired</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <ul class="list-group-flush">
+                    <li class="list-group-item">
+                        <input id="isEnabled" type="checkbox" name="active" th:field="*{isEnabled}"/>
+                        <label th:for="isEnabled">&nbsp;isEnabled</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <label th:for="roles"> Roles :</label>
+                <select th:field="*{authorities}" class="form-control" id="roles">
+                    <option th:each="authorities : ${authoritiesList}" th:value="${authorities.id}" th:text="${authorities.authority}">Authority</option>
+                </select>
+                <div class="form-control-feedback small" th:each="error : ${#fields.errors('authorities')}" th:text="${error}">Error in roles</div>
+            </div>
+        </div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <input type="submit" class="btn btn-primary" value="Submit"/>
+    </form>
 </body>
 </html>
